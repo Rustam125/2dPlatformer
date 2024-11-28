@@ -13,7 +13,7 @@ namespace Controllers
         private Rigidbody2D _rigidbody2D;
         private AnimatedCharacter _animatedCharacter;
 
-        private void Start()
+        private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animatedCharacter = GetComponent<AnimatedCharacter>();

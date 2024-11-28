@@ -6,6 +6,8 @@ namespace Models
     {
         public bool IsGrounded { get; set; }
         public bool IsRunning { get; set; }
+        public bool IsHitting { get; set; }
+        public bool IsTakingDamage { get; set; }
         
         private void OnCollisionEnter2D(Collision2D other)
         {

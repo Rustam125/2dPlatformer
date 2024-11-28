@@ -15,7 +15,7 @@ namespace Controllers
         private AnimatedCharacter _animatedCharacter;
         private float _horizontalInput;
 
-        private void Start()
+        private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -41,8 +41,17 @@ namespace Controllers
             {
                 return;
             }
+            
+            var localScale = transform.localScale;
 
-            _spriteRenderer.flipX = _horizontalInput < 0;
+            if ((localScale.x < 0 && _horizontalInput < 0) ||
+                (localScale.x > 0 && _horizontalInput > 0))
+            {
+                return;
+            }
+            
+            localScale.x *= -1;
+            transform.localScale = localScale;
         }
     }
 }

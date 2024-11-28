@@ -9,7 +9,8 @@ namespace Controllers
         private const string JumpButton = "Jump";
 
         [SerializeField] private float _jumpForce = 300f;
-    
+        [SerializeField] private InputReader _input;
+
         private Rigidbody2D _rigidbody2D;
         private AnimatedCharacter _animatedCharacter;
 
@@ -18,19 +19,19 @@ namespace Controllers
             _rigidbody2D = GetComponent<Rigidbody2D>();
             _animatedCharacter = GetComponent<AnimatedCharacter>();
         }
-
-        private void Update()
+        
+        private void OnEnable()
         {
-            Jump();
+            _input.Jumped += Jump;
+        }
+
+        private void OnDisable()
+        {
+            _input.Jumped -= Jump;
         }
 
         private void Jump()
         {
-            if (Input.GetButtonDown(JumpButton) == false)
-            {
-                return;
-            }
-        
             _rigidbody2D.AddForce(new Vector2(_rigidbody2D.velocity.x, _jumpForce));
             _animatedCharacter.IsGrounded = false;
         }

@@ -15,6 +15,7 @@ namespace Controllers
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private AudioSource _audioSource;
 
+        private CharacterHelper _characterHelper;
         private AnimatedCharacter _animatedCharacter;
         private IDamageable _damageableTarget;
         private float _attackCooldown;
@@ -25,6 +26,7 @@ namespace Controllers
         {
             _animatedCharacter = GetComponent<AnimatedCharacter>();
             _attackCooldown = _delay;
+            _characterHelper = new CharacterHelper();
         }
 
         private void Start()
@@ -44,7 +46,7 @@ namespace Controllers
 
         private void AttackHandle()
         {
-            if (MainHelper.IsSeeGameObject(transform, MinDistanceToAttack, _layerMask, out _damageableTarget) == false ||
+            if (_characterHelper.IsSeeGameObject(transform, MinDistanceToAttack, _layerMask, out _damageableTarget) == false ||
                 _damageableTarget is not Player)
             {
                 StopAttack();

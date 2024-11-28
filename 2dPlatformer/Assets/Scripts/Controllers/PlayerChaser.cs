@@ -12,6 +12,7 @@ namespace Controllers
         [SerializeField] private float _minDistance = 1f;
         [SerializeField] private float _speed = 3f;
 
+        private CharacterHelper _characterHelper;
         private AnimatedCharacter _animatedCharacter;
         private Enemy _enemy;
         private Player _player;
@@ -20,16 +21,17 @@ namespace Controllers
         {
             _animatedCharacter = GetComponent<AnimatedCharacter>();
             _enemy = GetComponent<Enemy>();
+            _characterHelper = new CharacterHelper();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             Chase();
         }
 
         private void Chase()
         {
-            if (MainHelper.IsSeeGameObject(transform, _viewingDistance, _layerMask, out _player) == false || 
+            if (_characterHelper.IsSeeGameObject(transform, _viewingDistance, _layerMask, out _player) == false || 
                 _player is null)
             {
                 _enemy.IsPatrolling = true;

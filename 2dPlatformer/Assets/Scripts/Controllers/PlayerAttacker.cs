@@ -1,7 +1,6 @@
 using Helpers;
 using Interfaces;
 using Models;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Controllers
@@ -14,35 +13,44 @@ namespace Controllers
         [SerializeField] private float _forceDamage = 2f;
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private InputReader _input;
 
+        private CharacterHelper _characterHelper;
         private AnimatedCharacter _animatedCharacter;
         
         private void Awake()
         {
             _animatedCharacter = GetComponent<AnimatedCharacter>();
+            _characterHelper = new CharacterHelper();
         }
 
-        private void Update()
+        private void OnEnable()
         {
-            Attack();
+            _input.Attacked += Attack;
+            _input.AttackCompleted += CompleteAttack;
+        }
+
+        private void OnDisable()
+        {
+            _input.Attacked -= Attack;
+            _input.AttackCompleted -= CompleteAttack;
         }
 
         private void Attack()
         {
-            if (Input.GetMouseButtonDown((int)MouseButton.Left) == false)
-            {
-                _animatedCharacter.IsHitting = false;
-                return;
-            }
-            
             _animatedCharacter.IsHitting = true;
             _audioSource.Play();
 
-            if (MainHelper.IsSeeGameObject(transform, MinDistanceToAttack, _layerMask, out IDamageable damageableTarget) &&
+            if (_characterHelper.IsSeeGameObject(transform, MinDistanceToAttack, _layerMask, out IDamageable damageableTarget) &&
                 damageableTarget is not Player)
             {
                 damageableTarget?.TakeDamage(_forceDamage);
             }
+        }
+
+        private void CompleteAttack()
+        {
+            _animatedCharacter.IsHitting = false;
         }
     }
 }

@@ -6,10 +6,10 @@ namespace Controllers
     [RequireComponent(typeof(Animator), typeof(AnimatedCharacter))]
     public class CharacterAnimator : MonoBehaviour
     {
-        private static readonly int s_IsRunning = Animator.StringToHash("IsRunning");
-        private static readonly int s_IsJumping = Animator.StringToHash("IsJumping");
-        private static readonly int s_IsHitting = Animator.StringToHash("IsHitting");
-        private static readonly int s_IsTakingDamage = Animator.StringToHash("IsTakingDamage");
+        private static readonly int s_isRunning = Animator.StringToHash("IsRunning");
+        private static readonly int s_isJumping = Animator.StringToHash("IsJumping");
+        private static readonly int s_isHitting = Animator.StringToHash("IsHitting");
+        private static readonly int s_isTakingDamage = Animator.StringToHash("IsTakingDamage");
 
         private Animator _animator;
         private AnimatedCharacter _animatedCharacter;
@@ -35,22 +35,22 @@ namespace Controllers
 
         private void SetupRunningAnimation(bool value)
         {
-            _animator.SetBool(s_IsRunning, value);
+            _animator.SetBool(s_isRunning, value);
         }
     
         private void SetupJumpingAnimation(bool value)
         {
-            _animator.SetBool(s_IsJumping, value);
+            _animator.SetBool(s_isJumping, value);
         }
         
         private void SetupHittingAnimation(bool value)
         {
-            _animator.SetBool(s_IsHitting, value);
+            _animator.SetBool(s_isHitting, value);
         }
         
         private void SetupTakingDamageAnimation(bool value)
         {
-            _animator.SetBool(s_IsTakingDamage, value);
+            _animator.SetBool(s_isTakingDamage, value);
 
             if (value)
             {

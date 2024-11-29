@@ -6,8 +6,6 @@ namespace Controllers
     [RequireComponent(typeof(Rigidbody2D), typeof(AnimatedCharacter))]
     public class PlayerMover : MonoBehaviour
     {
-        private const string Horizontal = nameof(Horizontal);
-    
         [SerializeField] private float _speed = 5f;
         [SerializeField] private InputReader _input;
         

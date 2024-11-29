@@ -11,8 +11,9 @@ namespace Models
         
         private AnimatedCharacter _animatedCharacter;
 
-        public float Health { get; private set; } = 100;
         public event Action HealthChanged;
+        
+        public float Health { get; private set; } = 100;
 
         private void Awake()
         {
@@ -31,7 +32,7 @@ namespace Models
             }
         }
 
-        public void Heal(float amount)
+        public void GetHeal(float amount)
         {
             Health += amount;
             HealthChanged?.Invoke();

@@ -6,7 +6,7 @@ namespace Models
     public class Kit : MonoBehaviour, IResource
     {
         [SerializeField] private float _healPoints = 10f;
-        [SerializeField] AudioClip _audioClip;
+        [SerializeField] private AudioClip _audioClip;
 
         public AudioClip AudioClip => _audioClip;
         public float HealPoints => _healPoints;

@@ -5,7 +5,7 @@ namespace Models
 {
     public class Coin : MonoBehaviour, IResource
     {
-         [SerializeField] AudioClip _audioClip;
+         [SerializeField] private AudioClip _audioClip;
 
          public AudioClip AudioClip => _audioClip;
     }

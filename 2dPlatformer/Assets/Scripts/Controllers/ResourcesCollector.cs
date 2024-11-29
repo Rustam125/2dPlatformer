@@ -39,7 +39,7 @@ namespace Controllers
         
         private void CollectKits(Kit kit)
         {
-            _player.Heal(kit.HealPoints);
+            _player.GetHeal(kit.HealPoints);
             Destroy(kit.gameObject);
         }
     }
